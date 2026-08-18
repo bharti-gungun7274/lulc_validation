@@ -11,7 +11,7 @@ from gis.points import (
     load_validation_points,
 )
 
-from gis.rasters import (
+from gis.raster import (
     Raster,
     RasterMetadata,
     open_raster,
