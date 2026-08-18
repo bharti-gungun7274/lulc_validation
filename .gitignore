@@ -1,3 +1,14 @@
+# Large satellite reference rasters
+data/*/Delhi_Sentinel2_*_Reference_RGB.tif
+
+# Large raster datasets
+data/**/*.tif
+
+# QGIS auxiliary files
+*.aux.xml
+.venv/
+__pycache__/
+*.py[cod]
 __pycache__/
 *.pyc
 .venv/
