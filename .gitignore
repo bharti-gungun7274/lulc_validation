@@ -6,3 +6,6 @@ data/**/*.tif
 
 # QGIS auxiliary files
 *.aux.xml
+.venv/
+__pycache__/
+*.py[cod]
