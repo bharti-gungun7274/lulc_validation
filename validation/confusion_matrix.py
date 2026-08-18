@@ -1,4 +1,5 @@
 import pandas as pd
+
 from sklearn.metrics import confusion_matrix
 
 
@@ -18,18 +19,21 @@ CLASS_NAMES = {
 }
 
 
-def create_confusion_matrix(reference, predicted):
+def create_confusion_matrix(
+    reference,
+    predicted,
+):
     """
     Create a LULC confusion matrix.
 
-    Rows    = Reference / Ground Truth
+    Rows = Reference / Ground Truth
     Columns = Predicted / Dynamic World
     """
 
     matrix = confusion_matrix(
         reference,
         predicted,
-        labels=VALID_CLASSES
+        labels=VALID_CLASSES,
     )
 
     names = [
@@ -40,13 +44,14 @@ def create_confusion_matrix(reference, predicted):
     return pd.DataFrame(
         matrix,
         index=names,
-        columns=names
+        columns=names,
     )
 
 
-def save_confusion_matrix(matrix, output_path):
-    """
-    Save confusion matrix as CSV.
-    """
+def save_confusion_matrix(
+    matrix,
+    output_path,
+):
+    """Save confusion matrix as CSV."""
 
     matrix.to_csv(output_path)

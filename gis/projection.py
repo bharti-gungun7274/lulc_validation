@@ -38,18 +38,7 @@ class CoordinateTransformationError(ProjectionError):
 
 @dataclass(frozen=True)
 class Coordinate:
-    """
-    Represents a coordinate together with its CRS.
-
-    Attributes
-    ----------
-    x:
-        X coordinate.
-    y:
-        Y coordinate.
-    crs:
-        CRS associated with the coordinate.
-    """
+    """Represents a coordinate together with its CRS."""
 
     x: float
     y: float
@@ -57,24 +46,8 @@ class Coordinate:
 
 
 def get_crs(value: Any) -> CRS:
-    """
-    Convert a CRS definition into a pyproj CRS object.
+    """Convert a CRS definition into a pyproj CRS object."""
 
-    Parameters
-    ----------
-    value:
-        CRS definition accepted by pyproj.
-
-    Returns
-    -------
-    CRS
-        Parsed pyproj CRS object.
-
-    Raises
-    ------
-    InvalidCRSError
-        If the CRS definition is invalid.
-    """
     if value is None:
         raise CRSNotAvailableError(
             "A CRS is required but none was provided."
@@ -92,21 +65,8 @@ def crs_equal(
     first: Any,
     second: Any,
 ) -> bool:
-    """
-    Compare two CRS definitions.
+    """Return True when two CRS definitions are equivalent."""
 
-    Parameters
-    ----------
-    first:
-        First CRS definition.
-    second:
-        Second CRS definition.
-
-    Returns
-    -------
-    bool
-        True when the CRS definitions are equivalent.
-    """
     first_crs = get_crs(first)
     second_crs = get_crs(second)
 
@@ -117,21 +77,8 @@ def require_matching_crs(
     first: Any,
     second: Any,
 ) -> None:
-    """
-    Ensure that two CRS definitions match.
+    """Raise an error when two CRS definitions do not match."""
 
-    Parameters
-    ----------
-    first:
-        First CRS definition.
-    second:
-        Second CRS definition.
-
-    Raises
-    ------
-    ProjectionError
-        If the CRS definitions do not match.
-    """
     first_crs = get_crs(first)
     second_crs = get_crs(second)
 
@@ -149,30 +96,8 @@ def transform_coordinate(
     source_crs: Any,
     target_crs: Any,
 ) -> tuple[float, float]:
-    """
-    Transform one coordinate from one CRS to another.
+    """Transform one coordinate between CRS definitions."""
 
-    Parameters
-    ----------
-    x:
-        X coordinate in the source CRS.
-    y:
-        Y coordinate in the source CRS.
-    source_crs:
-        CRS of the input coordinate.
-    target_crs:
-        CRS required for the output coordinate.
-
-    Returns
-    -------
-    tuple[float, float]
-        Transformed coordinate as ``(x, y)``.
-
-    Raises
-    ------
-    CoordinateTransformationError
-        If the transformation cannot be completed.
-    """
     source = get_crs(source_crs)
     target = get_crs(target_crs)
 
@@ -203,23 +128,8 @@ def transform_coordinates(
     source_crs: Any,
     target_crs: Any,
 ) -> list[tuple[float, float]]:
-    """
-    Transform multiple coordinates between CRS definitions.
+    """Transform multiple coordinates between CRS definitions."""
 
-    Parameters
-    ----------
-    coordinates:
-        List of ``(x, y)`` coordinate pairs.
-    source_crs:
-        CRS of the input coordinates.
-    target_crs:
-        CRS required for the output coordinates.
-
-    Returns
-    -------
-    list[tuple[float, float]]
-        Transformed coordinate pairs.
-    """
     source = get_crs(source_crs)
     target = get_crs(target_crs)
 
@@ -252,23 +162,8 @@ def make_coordinate(
     y: float,
     crs: Any,
 ) -> Coordinate:
-    """
-    Create a CRS-aware Coordinate object.
+    """Create a CRS-aware Coordinate object."""
 
-    Parameters
-    ----------
-    x:
-        X coordinate.
-    y:
-        Y coordinate.
-    crs:
-        CRS associated with the coordinate.
-
-    Returns
-    -------
-    Coordinate
-        Coordinate with a validated CRS.
-    """
     parsed_crs = get_crs(crs)
 
     return Coordinate(
@@ -282,21 +177,8 @@ def transform_coordinate_object(
     coordinate: Coordinate,
     target_crs: Any,
 ) -> Coordinate:
-    """
-    Transform a Coordinate object into another CRS.
+    """Transform a Coordinate object into another CRS."""
 
-    Parameters
-    ----------
-    coordinate:
-        Coordinate with its source CRS.
-    target_crs:
-        CRS required for the transformed coordinate.
-
-    Returns
-    -------
-    Coordinate
-        Transformed coordinate with the target CRS.
-    """
     target = get_crs(target_crs)
 
     x, y = transform_coordinate(
