@@ -1,4 +1,4 @@
-﻿# Large satellite reference rasters
+# Large satellite reference rasters
 data/*/Delhi_Sentinel2_*_Reference_RGB.tif
 
 # Large raster datasets
@@ -9,3 +9,8 @@ data/**/*.tif
 .venv/
 __pycache__/
 *.py[cod]
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
